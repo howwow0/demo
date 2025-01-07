@@ -1,12 +1,15 @@
 package com.example.demo.model.dto.response.entity;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Data
+
+@AllArgsConstructor
 @Getter
+@Setter
 public abstract class EntityResponse {
     protected Integer id;
     protected LocalDateTime createdAt;

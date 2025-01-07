@@ -5,25 +5,27 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
 public abstract class AbstractEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id = 0;
+    protected int id;
 
     @Setter
-    @Column(nullable = false, updatable = false)
-    protected LocalDateTime createdAt = LocalDateTime.now();
+    @Column(nullable = false, updatable = false, name = "`created_at`")
+    @CurrentTimestamp
+    protected LocalDateTime createdAt;
 
-    @Column()
+    @Column(name = "`updated_at`")
     @UpdateTimestamp
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 }

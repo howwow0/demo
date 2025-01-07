@@ -2,6 +2,9 @@ spring:
   application:
     name: demo
 
+  main:
+    banner-mode: off
+
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
@@ -14,31 +17,32 @@ spring:
       hibernate:
         connection:
           pool_size: 30
-        dialect: org.hibernate.dialect.H2Dialect
         show_sql: true
     hibernate:
       ddl-auto: update
 
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
+  security:
+    user:
+      name: ${SEC_USER_NAME:admin@mail.ru}
+      password: ${SEC_USER_PASSWORD:password}
+      roles: ADMIN
 
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
 
 springdoc:
-
   api-docs:
     path: /api-docs
-
   show-actuator: true
-
   swagger-ui:
     show-extensions: true
     operations-sorter: method
 
 server:
   port: 8080
+
+jwt:
+  key: ${JWT_SIGNING_KEY:9ab3fee80daeaf6f8c80d420be7ad1e29a6fef1cde8efafd8a551789c479c2b6}
+  access-token-expiration: 36000000
+  refresh-token-expiration: 2592000000
